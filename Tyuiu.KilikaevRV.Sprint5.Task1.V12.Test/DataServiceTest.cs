@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
 using Tyuiu.KilikaevRV.Sprint5.Task1.V12.Lib;
+using System;
 
 namespace Tyuiu.KilikaevRV.Sprint5.Task1.V12.Test
 {
@@ -9,31 +8,31 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task1.V12.Test
     public class DataServiceTest
     {
         [TestMethod]
-        public void CheckFileExists()
+        public void ValidCalculateFunction()
+        {
+            DataService ds = new DataService();
+
+            // Проверяем значения для каждого x от -5 до 5
+            Assert.AreEqual(23.61, ds.CalculateFunction(-5));
+            Assert.AreEqual(16.08, ds.CalculateFunction(-4));
+            Assert.AreEqual(7.84, ds.CalculateFunction(-3));
+            Assert.AreEqual(4.58, ds.CalculateFunction(-2));
+            Assert.AreEqual(2.88, ds.CalculateFunction(-1));
+            Assert.AreEqual(0.75, ds.CalculateFunction(0));
+            Assert.AreEqual(-4.47, ds.CalculateFunction(1));
+            Assert.AreEqual(-9.46, ds.CalculateFunction(2));
+            Assert.AreEqual(-7.41, ds.CalculateFunction(3));
+            Assert.AreEqual(-6.16, ds.CalculateFunction(4));
+            Assert.AreEqual(-7.29, ds.CalculateFunction(5));
+        }
+
+        [TestMethod]
+        public void ValidSaveToFile()
         {
             DataService ds = new DataService();
             string path = ds.SaveToFileTextData(-5, 5);
 
-            FileInfo fileInfo = new FileInfo(path);
-            bool fileExists = fileInfo.Exists;
-
-            Assert.AreEqual(true, fileExists);
-        }
-
-        [TestMethod]
-        public void CheckDivisionByZero()
-        {
-            DataService ds = new DataService();
-
-            // Проверяем, что при делении на ноль возвращается 0
-            // Для этого найдем значение x, где sin(x) - 2 = 0
-            // sin(x) = 2 - это невозможно, так как sin(x) ∈ [-1, 1]
-            // Значит деления на ноль не должно быть, но проверим работу функции
-            double result = ds.CalculateFunction(0); // Любое значение
-
-            // Проверяем, что результат является числом (не NaN и не бесконечность)
-            Assert.IsFalse(double.IsNaN(result));
-            Assert.IsFalse(double.IsInfinity(result));
+            Assert.IsTrue(System.IO.File.Exists(path));
         }
     }
 }

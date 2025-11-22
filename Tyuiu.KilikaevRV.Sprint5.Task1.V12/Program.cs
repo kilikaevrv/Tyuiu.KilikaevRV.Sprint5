@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Tyuiu.KilikaevRV.Sprint5.Task1.V12.Lib;
 
 namespace Tyuiu.KilikaevRV.Sprint5.Task1.V12
@@ -8,20 +7,18 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task1.V12
     {
         static void Main(string[] args)
         {
-            Console.Title = "Спринт #5 | Выполнил: Килияев Р. В. | АСОиУб-23-3";
+            DataService ds = new DataService();
+
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* Спринт #5                                                               *");
             Console.WriteLine("* Тема: Класс File. Запись набора данных в текстовый файл                *");
             Console.WriteLine("* Задание #1                                                              *");
             Console.WriteLine("* Вариант #12                                                             *");
-            Console.WriteLine("* Выполнил: Килияев Роман Владимирович | АСОиУб-23-3                     *");
+            Console.WriteLine("* Выполнил: Килияев Р. В. | АСОиУб-23-3                                  *");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* УСЛОВИЕ:                                                                *");
             Console.WriteLine("* Дана функция: F(x) = (5x + 2.5)/(sin(x) - 2) + 2                       *");
             Console.WriteLine("* Произвести табулирование f(x) на диапазоне [-5; 5] с шагом 1.          *");
-            Console.WriteLine("* При делении на ноль вернуть значение 0.                                *");
-            Console.WriteLine("* Результат сохранить в текстовый файл OutPutFileTask1.txt               *");
-            Console.WriteLine("* и вывести на консоль в таблицу. Округлить до двух знаков после запятой.*");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
@@ -29,25 +26,29 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task1.V12
             int startValue = -5;
             int stopValue = 5;
 
-            Console.WriteLine($"Начало диапазона: {startValue}");
-            Console.WriteLine($"Конец диапазона: {stopValue}");
+            Console.WriteLine($"startValue = {startValue}");
+            Console.WriteLine($"stopValue = {stopValue}");
 
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
             Console.WriteLine("***************************************************************************");
 
-            DataService ds = new DataService();
-            string path = ds.SaveToFileTextData(startValue, stopValue);
+            string res = ds.SaveToFileTextData(startValue, stopValue);
 
-            Console.WriteLine("Файл: " + path);
+            Console.WriteLine("Файл: " + res);
             Console.WriteLine("Создан!");
 
-            Console.WriteLine("\nСодержимое файла:");
-            string[] fileContent = File.ReadAllLines(path);
-            foreach (string line in fileContent)
+            // Вывод результатов на консоль
+            Console.WriteLine("\n+----------+----------+");
+            Console.WriteLine("|    x     |   f(x)   |");
+            Console.WriteLine("+----------+----------+");
+
+            for (int x = startValue; x <= stopValue; x++)
             {
-                Console.WriteLine(line);
+                double value = ds.CalculateFunction(x);
+                Console.WriteLine($"| {x,5}    | {value,8:F2} |");
             }
+            Console.WriteLine("+----------+----------+");
 
             Console.ReadKey();
         }
