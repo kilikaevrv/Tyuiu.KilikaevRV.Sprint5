@@ -17,8 +17,8 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27
             Console.WriteLine("* Выполнил: Килияев Роман Владимирович | АСОиУб-23-3                     *");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* УСЛОВИЕ:                                                                *");
-            Console.WriteLine("* Дан файл в котором есть набор символьных данных. Удалить все пробелы,   *");
-            Console.WriteLine("* идущие подряд больше одного. Полученный результат сохранить в файл.     *");
+            Console.WriteLine("* Дан файл в котором есть набор символьных данных. Удалить ВСЕ пробелы.   *");
+            Console.WriteLine("* Полученный результат сохранить в файл.                                  *");
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
@@ -32,7 +32,7 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27
                 Console.WriteLine("Создаем тестовый файл...");
 
                 Directory.CreateDirectory(@"C:\DataSprints\");
-                string testContent = "Пример    текста    с    множественными    пробелами.    Проверка    работы.";
+                string testContent = "Это пример текста с пробелами";
                 File.WriteAllText(path, testContent);
                 Console.WriteLine($"Создан тестовый файл: {path}");
             }
@@ -40,7 +40,7 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27
             Console.WriteLine($"Исходный файл: {path}");
             Console.WriteLine("Содержимое исходного файла:");
             string inputContent = File.ReadAllText(path);
-            Console.WriteLine(inputContent);
+            Console.WriteLine($"'{inputContent}'");
 
             Console.WriteLine();
             Console.WriteLine("***************************************************************************");
@@ -60,8 +60,8 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27
                 File.WriteAllText(outputPath, result);
 
                 Console.WriteLine($"Результат сохранен в файл: {outputPath}");
-                Console.WriteLine("Обработанное содержимое:");
-                Console.WriteLine(result);
+                Console.WriteLine("Обработанное содержимое (без пробелов):");
+                Console.WriteLine($"'{result}'");
 
                 // Очищаем временный файл
                 File.Delete(tempFile);
