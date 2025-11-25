@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using Tyuiu.KilikaevRV.Sprint5.Task7.V27.Lib;
+using Tyuiu.KilkaevRV.Sprint5.Task7.V27.Lib;
 
-namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Test
+namespace Tyuiu.KilkaevRV.Sprint5.Task7.V27.Test
 {
     [TestClass]
     public class DataServiceTest
@@ -13,13 +13,10 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Test
         {
             string path = @"C:\DataSprints\InPutDataFileTask7V27.txt";
 
-            // Создаем тестовый файл если его нет
-            if (!File.Exists(path))
-            {
-                Directory.CreateDirectory(@"C:\DataSprints\");
-                string testContent = "Hello     world!    This    is    a    test    with    multiple    spaces.";
-                File.WriteAllText(path, testContent);
-            }
+            // Создаем тестовый файл с пробелами
+            Directory.CreateDirectory(@"C:\DataSprints\");
+            string testContent = "Это строка с пробелами";
+            File.WriteAllText(path, testContent);
 
             DataService ds = new DataService();
             string tempFile = ds.LoadDataAndSave(path);
@@ -29,12 +26,31 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Test
 
             // Читаем результат
             string result = File.ReadAllText(tempFile);
-            string expected = "Hello world! This is a test with multiple spaces.";
+            string expected = "Этострокаспробелами"; // Без пробелов!
 
-            // Проверяем что множественные пробелы удалены
+            // Проверяем что ВСЕ пробелы удалены
             Assert.AreEqual(expected, result);
 
             // Очистка
+            File.Delete(tempFile);
+        }
+
+        [TestMethod]
+        public void TestWithMultipleSpaces()
+        {
+            string path = @"C:\DataSprints\TestFile.txt";
+
+            string testContent = "Много    пробелов     здесь";
+            File.WriteAllText(path, testContent);
+
+            DataService ds = new DataService();
+            string tempFile = ds.LoadDataAndSave(path);
+
+            string result = File.ReadAllText(tempFile);
+            string expected = "Многопробеловздесь";
+
+            Assert.AreEqual(expected, result);
+
             File.Delete(tempFile);
         }
 

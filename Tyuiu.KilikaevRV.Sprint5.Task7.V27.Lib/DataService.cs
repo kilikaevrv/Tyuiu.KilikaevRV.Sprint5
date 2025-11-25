@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using tyuiu.cources.programming.interfaces.Sprint5;
 
-namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Lib
+namespace Tyuiu.KilkaevRV.Sprint5.Task7.V27.Lib
 {
     public class DataService : ISprint5Task7V27
     {
@@ -16,8 +16,8 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Lib
                 // Читаем все содержимое файла
                 string content = File.ReadAllText(path);
 
-                // Удаляем множественные пробелы, оставляя только одиночные
-                string result = RemoveExtraSpaces(content);
+                // Удаляем ВСЕ пробелы
+                string result = RemoveAllSpaces(content);
 
                 // Сохраняем результат во временный файл
                 File.WriteAllText(tempFile, result, Encoding.UTF8);
@@ -30,32 +30,13 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task7.V27.Lib
             }
         }
 
-        private string RemoveExtraSpaces(string input)
+        private string RemoveAllSpaces(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return input;
 
-            StringBuilder result = new StringBuilder();
-            bool previousWasSpace = false;
-
-            foreach (char c in input)
-            {
-                if (c == ' ')
-                {
-                    if (!previousWasSpace)
-                    {
-                        result.Append(c);
-                        previousWasSpace = true;
-                    }
-                }
-                else
-                {
-                    result.Append(c);
-                    previousWasSpace = false;
-                }
-            }
-
-            return result.ToString();
+            // Удаляем все пробелы
+            return input.Replace(" ", "");
         }
     }
 }
