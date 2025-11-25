@@ -15,7 +15,7 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task6.V13.Test
 
             File.WriteAllText(path, "Ссколько удвоенных с cc тут еccть");
             int result = ds.LoadFromDataFile(path);
-            int wait = 1; // "cc" в середине - английские буквы, "сс" - русские
+            int wait = 3; // "Сс" + "cc" + "cc" = 3
 
             Assert.AreEqual(wait, result);
         }
