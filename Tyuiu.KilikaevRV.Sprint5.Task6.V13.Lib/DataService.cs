@@ -1,6 +1,6 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint5;
-using System;
-using System.IO;
+﻿using System.IO;
+using tyuiu.cources.programming.interfaces.Sprint5;
+
 
 namespace Tyuiu.KilikaevRV.Sprint5.Task6.V13.Lib
 {
@@ -10,11 +10,19 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task6.V13.Lib
         {
             string text = File.ReadAllText(path);
             int count = 0;
+            int i = 0;
 
-            for (int i = 0; i < text.Length - 1; i++)
+            while (i < text.Length - 1)
             {
-                if (text[i] == 'c' && text[i + 1] == 'c')
+                if (text[i] == 'с' && text[i + 1] == 'с') // Русские буквы 'с'
+                {
                     count++;
+                    i += 2;
+                }
+                else
+                {
+                    i++;
+                }
             }
 
             return count;

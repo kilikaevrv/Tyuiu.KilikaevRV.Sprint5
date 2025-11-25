@@ -13,9 +13,9 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task6.V13.Test
             DataService ds = new DataService();
             string path = @"C:\DataSprint5\InPutDataFileTask6V13.txt";
 
-            File.WriteAllText(path, "acccb ccdd cc cc");
+            File.WriteAllText(path, "Ссколько удвоенных с cc тут еccть");
             int result = ds.LoadFromDataFile(path);
-            int wait = 5; // "acc c b  cc dd  cc   cc" - 5 удвоенных "cc"
+            int wait = 1; // "cc" в середине - английские буквы, "сс" - русские
 
             Assert.AreEqual(wait, result);
         }
