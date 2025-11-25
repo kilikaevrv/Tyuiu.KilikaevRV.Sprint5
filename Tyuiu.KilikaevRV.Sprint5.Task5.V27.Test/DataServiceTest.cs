@@ -1,6 +1,6 @@
 ﻿using Tyuiu.KilikaevRV.Sprint5.Task5.V27.Lib;
-using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 
 namespace Tyuiu.KilikaevRV.Sprint5.Task5.V27.Test
 {
@@ -13,11 +13,9 @@ namespace Tyuiu.KilikaevRV.Sprint5.Task5.V27.Test
             DataService ds = new DataService();
             string path = @"C:\DataSprint5\InPutDataFileTask5V27.txt";
 
-            File.WriteAllLines(path, new[] { "10", "15", "25", "30", "7", "20" });
-            double result = ds.LoadFromDataFile(path);
-            double wait = 20.0; // (10+15+25+30+20)/5 = 20
+            File.WriteAllText(path, "-6 6 20 15.33 -0.67 11 4.06 -1.61 -9.48 -6 -4.93 -3.61 8 -1 17 19 19.92 8 -5 -3.35");
 
-            Assert.AreEqual(wait, result);
+            Assert.AreEqual(7.5, ds.LoadFromDataFile(path));
         }
     }
 }
